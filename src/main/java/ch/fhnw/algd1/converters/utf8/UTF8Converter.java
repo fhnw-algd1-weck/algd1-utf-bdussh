@@ -10,6 +10,11 @@ import java.util.Arrays;
  * @author 
  */
 public class UTF8Converter {
+	public static void main(String[] args) {
+		byte[] utf8Bytes = {(byte) 0xF0, (byte) 0x9F, (byte) 0x98, (byte) 0xA5};
+		int codePoint = UTFtoCodePoint(utf8Bytes);
+		System.out.println(Integer.toHexString(codePoint));
+	}
 	public static byte[] codePointToUTF(int x) {
 
 		int len = 4;
@@ -39,7 +44,7 @@ public class UTF8Converter {
 			int len = bytes.length;
 			if (len == 1) return bytes[0];
 			int x = 0;
-			x |= bytes[0] & 0xFF;
+			x |= bytes[0];
 			x <<= 25 + len;
 			x >>>= 25 + len;
 			for (int i = 1; i < len; i++) {
